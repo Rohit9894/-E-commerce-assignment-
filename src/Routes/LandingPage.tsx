@@ -12,7 +12,7 @@ const LandingPage = () => {
   };
   useEffect(() => {
     fetchData();
-  });
+  },[]);
   return (
     <div className="container">
       {/* sort filter */}

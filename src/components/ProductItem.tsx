@@ -19,10 +19,10 @@ const ProductItem = ({ product }: { product: Product }) => {
       <div className="mt-4 flex flex-col justify-between  py-2 px-4  flex-grow">
         <Link to={`/product/${id}`}>
           <div>
-            <h3 className="text-md font-semibold line-clamp-2">{title}</h3>
+            <h3 className="product-title line-clamp-2">{title}</h3>
             <p className="mt-1 text-sm text-gray-500">{category}</p>
             <div className="flex-center justify-between mt-4  w-full">
-              <h3 className="text-lg font-semibold line-clamp-2">₹{price}</h3>
+              <h3 className="text-lg font-semibold">₹{price}</h3>
               <div className="flex-center font-bold gap-2">
                 <Star fill="gold" color="gold" size={"20px"} />
                 {rating?.rate}
