@@ -68,8 +68,14 @@
     @apply text-foreground font-outfit overflow-x-hidden;
   }
 }
-@layer utilities{
-  .flex-center{
+@layer utilities {
+  .flex-center {
     @apply flex items-center;
+  }
+  .filter-button {
+    @apply flex-center gap-2 border border-solid border-gray-800 px-4 py-1 rounded-xl;
+  }
+  .border_black {
+    @apply border border-solid border-black;
   }
 }
