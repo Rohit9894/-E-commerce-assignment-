@@ -40,6 +40,7 @@ const ProductDetail = () => {
           </div>
         </div>
         <div className="flex-center justify-between my-4">
+            {/* Buttons */}
           <Button>Buy Now</Button>
           <Button>Add To Cart</Button>
         </div>

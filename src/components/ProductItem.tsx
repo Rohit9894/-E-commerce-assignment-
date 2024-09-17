@@ -21,17 +21,20 @@ const ProductItem = ({ product }: { product: Product }) => {
           <div>
             <h3 className="product-title line-clamp-2">{title}</h3>
             <p className="mt-1 text-sm text-gray-500">{category}</p>
-            <div className="flex-center justify-between mt-4  w-full">
-              <h3 className="text-lg font-semibold">₹{price}</h3>
-              <div className="flex-center font-bold gap-2">
-                <Star fill="gold" color="gold" size={"20px"} />
-                {rating?.rate}
-              </div>
-            </div>
           </div>
         </Link>
 
-        <Button className=" w-full my-4 flex-grow-1">Add To Cart</Button>
+        <div>
+          <div className="flex-center justify-between mt-4  w-full">
+            <h3 className="text-lg font-semibold">₹{price}</h3>
+
+            <div className="flex-center font-bold gap-2">
+              <Star fill="gold" color="gold" size={"20px"} />
+              {rating?.rate}
+            </div>
+          </div>
+          <Button className=" w-full my-4 flex-grow-1">Add To Cart</Button>
+        </div>
       </div>
     </div>
   );
