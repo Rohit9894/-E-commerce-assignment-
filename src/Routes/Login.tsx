@@ -1,4 +1,34 @@
+import { authUser } from "@/api/auth";
+import { Button } from "@/components/ui/button";
+import { useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
+import {RootState} from "../redux/store"
+const initState = {
+  username: "mor_2314",
+  password: "83r5^_",
+};
 const Login = () => {
+  const [formState, setFormState] = useState(initState);
+  const isAuth = useSelector((state:RootState) => state.auth.isAuth);
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+  const loading = useSelector((state:RootState) => state.auth.loading);
+  function handleLogin(e: React.FormEvent<HTMLFormElement>) {
+    e.preventDefault();
+    dispatch(authUser(formState));
+  }
+  if (isAuth) {
+    navigate("/");
+  }
+  function handleChange(e: React.ChangeEvent<HTMLInputElement>) {
+    const { name, value } = e.target;
+    setFormState({
+      ...formState,
+      [name]: value,
+    });
+  }
+  const { username, password } = formState;
   return (
     <div className="container">
       <div className="flex min-h-full flex-col justify-center px-6 py-12 lg:px-8">
@@ -9,16 +39,18 @@ const Login = () => {
         </div>
 
         <div className="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
-          <form className="space-y-6">
+          <form className="space-y-6" onSubmit={handleLogin}>
             <div>
               <label className="block text-sm font-medium leading-6 text-gray-900">
                 Email address
               </label>
               <div className="mt-2">
                 <input
-                  id="email"
-                  name="email"
-                  type="email"
+                  id="username"
+                  name="username"
+                  value={username}
+                  type="text"
+                  onChange={handleChange}
                   required
                   className="input-style"
                 />
@@ -43,6 +75,7 @@ const Login = () => {
                 <input
                   id="password"
                   name="password"
+                  value={password}
                   type="password"
                   required
                   className="input-style"
@@ -51,12 +84,9 @@ const Login = () => {
             </div>
 
             <div>
-              <button
-                type="submit"
-                className="flex w-full justify-center rounded-md bg-indigo-600 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
-              >
+              <Button type="submit" disabled={loading} className="w-full">
                 Sign in
-              </button>
+              </Button>
             </div>
           </form>
         </div>

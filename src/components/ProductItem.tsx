@@ -2,9 +2,21 @@ import { Product } from "@/type/type";
 import { Star } from "lucide-react";
 import { Button } from "./ui/button";
 import { Link } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { addToCart } from "@/redux/cart.slice";
+import {RootState} from "../redux/store"
 
 const ProductItem = ({ product }: { product: Product }) => {
+  const cartData = useSelector((state:RootState) => state.cart.cart);
+  const dispatch = useDispatch();
   const { id, image, title, category, price, rating } = product;
+  function handleAddToCart() {
+    let item = {
+      ...product,
+      quantity: 1,
+    };
+    dispatch(addToCart(item));
+  }
   return (
     <div className="bg-gray-200 shadow-product rounded-lg cursor-pointer flex flex-col hover:bg-gray-400  ">
       <Link to={`/product/${id}`}>
@@ -33,7 +45,13 @@ const ProductItem = ({ product }: { product: Product }) => {
               {rating?.rate}
             </div>
           </div>
-          <Button className=" w-full my-4 flex-grow-1">Add To Cart</Button>
+          <Button
+            onClick={handleAddToCart}
+            disabled={cartData.find((item)=>item.id==id)}
+            className=" w-full my-4 flex-grow-1"
+          >
+            Add To Cart
+          </Button>
         </div>
       </div>
     </div>

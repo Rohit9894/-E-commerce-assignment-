@@ -2,8 +2,8 @@ import React from "react";
 export interface BottomDrawerProps {
   show?: boolean;
   filter?: boolean;
-  setFilter?: boolean;
-  setShow?: () => void;
+  setFilter?: (value: boolean) => void;
+  setShow?: (value: boolean) => void;
 
   children?: React.ReactNode;
 }

@@ -11,6 +11,7 @@ const category = [
   "women's clothing",
 ];
 const LandingPage = () => {
+
   const globalDataRef = useRef<Product[]>([]);
   const [productData, setProductData] = useState<Product[]>([]);
   const [sort, setSort] = useState<boolean>(false);
