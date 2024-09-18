@@ -1,17 +1,19 @@
 import { ArrowDownUp, SlidersHorizontal } from "lucide-react";
 import { BottomDrawerProps } from "./BottomDrawer";
 
-const SortFilter = ({ show, setShow }: BottomDrawerProps) => {
+const SortFilter = ({
+  show,
+  setShow,
+  filter,
+  setFilter,
+}: BottomDrawerProps) => {
   return (
-    <div
-      onClick={() => setShow(!show)}
-      className="flex-center justify-between mt-2 cursor-pointer"
-    >
-      <div className="filter-button">
+    <div className="flex-center justify-between mt-2 cursor-pointer">
+      <div onClick={() => setShow(!show)} className="filter-button">
         <ArrowDownUp size={"20px"} />
         <p className="font-semibold">Sort</p>
       </div>
-      <div className="filter-button">
+      <div onClick={() => setFilter(!filter)} className="filter-button">
         <SlidersHorizontal size={"20px"} />
         <p className="font-semibold">Filter</p>
       </div>

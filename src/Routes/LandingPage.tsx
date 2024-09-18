@@ -3,20 +3,54 @@ import BottomDrawer from "@/components/BottomDrawer";
 import ProductItem from "@/components/ProductItem";
 import SortFilter from "@/components/SortFilter";
 import { Product } from "@/type/type";
-import { useEffect, useState } from "react";
-
+import { useEffect, useRef, useState } from "react";
+const category = [
+  "electronics",
+  "jewelery",
+  "men's clothing",
+  "women's clothing",
+];
 const LandingPage = () => {
+  const globalDataRef = useRef<Product[]>([]);
   const [productData, setProductData] = useState<Product[]>([]);
   const [sort, setSort] = useState<boolean>(false);
-  // const [filter,setFilter]=useState<boolean>(f)
+  const [filter, setFilter] = useState<boolean>(false);
+  const [selected, setSelected] = useState<string[]>([]);
 
   const fetchData = async () => {
     const { data } = await getdata();
+    globalDataRef.current = data;
     setProductData(data);
   };
+
+  function handleChange(e: React.ChangeEvent<HTMLInputElement>) {
+    const { value, checked } = e.target;
+    if (checked) {
+      setSelected((prevSelected) => [...prevSelected, value]);
+    } else {
+      setSelected((prevSelected) =>
+        prevSelected.filter((item) => item !== value)
+      );
+    }
+  }
+  function filterData() {
+    if (selected.length == 0) {
+      setProductData(globalDataRef.current);
+    } else {
+      const filteredData = globalDataRef.current.filter((item) =>
+        selected.includes(item.category)
+      );
+      setProductData(filteredData);
+    }
+  }
+  // /for initial fetch data data
   useEffect(() => {
     fetchData();
   }, []);
+  // for filtering data
+  useEffect(() => {
+    filterData();
+  }, [selected]);
   return (
     <>
       {/* Sort */}
@@ -49,9 +83,38 @@ const LandingPage = () => {
         </BottomDrawer>
       )}
 
+      {/* filter */}
+      {filter && (
+        <BottomDrawer show={sort} setShow={setFilter}>
+          <div className="h-full flex flex-col gap-4 ">
+            {category?.length > 0 &&
+              category.map((item) => (
+                <div className="flex-center gap-4">
+                  <input
+                    type="checkbox"
+                    checked={selected.includes(item)}
+                    value={item}
+                    onChange={handleChange}
+                    name="priceOrder"
+                    className="cursor-pointer"
+                  />
+                  <label className="block text-lg font-medium leading-6 ">
+                    {item}
+                  </label>
+                </div>
+              ))}
+          </div>
+        </BottomDrawer>
+      )}
+
       <div className="container">
         {/* sort filter */}
-        <SortFilter show={sort} setShow={setSort} />
+        <SortFilter
+          show={sort}
+          filter={filter}
+          setShow={setSort}
+          setFilter={setFilter}
+        />
         {/* products */}
         <div className="mt-6 grid gap-8 grid-cols-1 gap-x-6 gap-y-10 sm:grid-cols-2 lg:grid-cols-4 xl:gap-x-8">
           {productData.length > 0 &&

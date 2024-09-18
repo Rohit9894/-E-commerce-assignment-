@@ -1,7 +1,10 @@
 import React from "react";
 export interface BottomDrawerProps {
   show?: boolean;
+  filter?: boolean;
+  setFilter?: boolean;
   setShow?: () => void;
+
   children?: React.ReactNode;
 }
 const BottomDrawer = ({ setShow, children }: BottomDrawerProps) => {
