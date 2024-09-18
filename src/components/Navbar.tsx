@@ -32,7 +32,6 @@ const Navbar = () => {
             </Link>
           </div>
         )}
-        {isAuth?"Sahi":"Galat"}
         {!isAuth && (
           <Button
             onClick={() => (isAuth ? "" : navigate("/login"))}
