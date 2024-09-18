@@ -10,6 +10,6 @@ export const singleData = async (
 ): Promise<{ data: Product }> => {
   return axios.get(`https://fakestoreapi.com/products/${id}`);
 };
-export const sortData = async (value: string): Promise<{ data: Product }> => {
+export const sortData = async (value: string): Promise<{ data: Product[] }> => {
   return axios.get(`https://fakestoreapi.com/products?sort=${value}`);
 };

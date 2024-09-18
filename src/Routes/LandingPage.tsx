@@ -1,5 +1,6 @@
 import { getdata, sortData } from "@/api/product";
 import BottomDrawer from "@/components/BottomDrawer";
+import { Loading } from "@/components/Loading";
 import ProductItem from "@/components/ProductItem";
 import SortFilter from "@/components/SortFilter";
 import { Product } from "@/type/type";
@@ -11,17 +12,19 @@ const category = [
   "women's clothing",
 ];
 const LandingPage = () => {
-
   const globalDataRef = useRef<Product[]>([]);
   const [productData, setProductData] = useState<Product[]>([]);
   const [sort, setSort] = useState<boolean>(false);
+  const [loading, setLoading] = useState<boolean>(false);
   const [filter, setFilter] = useState<boolean>(false);
   const [selected, setSelected] = useState<string[]>([]);
 
   const fetchData = async () => {
+    setLoading(true);
     const { data } = await getdata();
     globalDataRef.current = data;
     setProductData(data);
+    setLoading(false);
   };
 
   function handleChange(e: React.ChangeEvent<HTMLInputElement>) {
@@ -131,12 +134,16 @@ const LandingPage = () => {
           setFilter={setFilter}
         />
         {/* products */}
-        <div className="mt-6 grid gap-8 grid-cols-1 gap-x-6 gap-y-10 sm:grid-cols-2 lg:grid-cols-4 xl:gap-x-8">
-          {productData.length > 0 &&
-            productData.map((item) => (
-              <ProductItem key={item.id} product={item} />
-            ))}
-        </div>
+        {loading ? (
+          <Loading />
+        ) : (
+          <div className="mt-6 grid gap-8 grid-cols-1 gap-x-6 gap-y-10 sm:grid-cols-2 lg:grid-cols-4 xl:gap-x-8">
+            {productData.length > 0 &&
+              productData.map((item) => (
+                <ProductItem key={item.id} product={item} />
+              ))}
+          </div>
+        )}
       </div>
     </>
   );
