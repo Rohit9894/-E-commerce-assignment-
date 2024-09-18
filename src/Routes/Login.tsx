@@ -16,6 +16,13 @@ const Login = () => {
   const navigate = useNavigate();
   const loading = useSelector((state: RootState) => state.auth.loading);
   function handleLogin(e: React.FormEvent<HTMLFormElement>) {
+    let username = "mor_2314";
+    let password = "83r5^_";
+    if (formState.username !== username || formState.password !== password) {
+      alert("Incorrect Credentials");
+      setFormState(initState);
+      return;
+    }
     e.preventDefault();
     // @ts-ignore
     dispatch(authUser(formState));
@@ -23,6 +30,7 @@ const Login = () => {
 
   function handleChange(e: React.ChangeEvent<HTMLInputElement>) {
     const { name, value } = e.target;
+
     setFormState({
       ...formState,
       [name]: value,
@@ -81,12 +89,17 @@ const Login = () => {
                   id="password"
                   name="password"
                   value={password}
+                  onChange={handleChange}
                   type={show ? "text" : "password"}
                   required
                   className="input-style"
                 />
-                <Button onClick={()=>setShow(!show)} type="button" className="absolute top-0 right-0">
-                 {show?"Hide":"Show"}
+                <Button
+                  onClick={() => setShow(!show)}
+                  type="button"
+                  className="absolute top-0 right-0"
+                >
+                  {show ? "Hide" : "Show"}
                 </Button>
               </div>
             </div>

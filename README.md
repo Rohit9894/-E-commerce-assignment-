@@ -13,9 +13,9 @@ Go to the project directory
 ```bash
   cd E-commerce-assignment
 ```
-npm install
+install
 ```bash
-  cd E-commerce-assignment
+  npm install
 ```
 
 start locally
@@ -43,5 +43,5 @@ mor_2314
 
 password
 ```bash
- 83r5^_
+83r5^_
 ```
