@@ -14,15 +14,15 @@ function Cart() {
   const total = +cartData
     .reduce((a, item) => a + item.price * item.quantity, 0)
     .toFixed(2);
-  let tax = cartData.length > 0 ? 140 : 0;
-  let grandTotal = (Number(total) + Number(tax)).toFixed(2);
+  const tax = cartData.length > 0 ? 140 : 0;
+  const grandTotal = (Number(total) + Number(tax)).toFixed(2);
   function handleOrder(){
     alert("Your order is placed")
     navigate("/")
   }
 
   return (
-    <div className="container mt-4">
+    <div className="container mt-20">
       {cartData.length > 0 ? (
         cartData.map((item) => <CartItem key={item.id} item={item} />)
       ) : (

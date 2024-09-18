@@ -15,7 +15,7 @@ const ProductDetail = () => {
     setItem(data);
   };
   function handleAddToCart() {
-    let newItem = {
+    const newItem = {
       ...item,
       quantity: 1,
     };
@@ -25,7 +25,7 @@ const ProductDetail = () => {
     fetchData();
   }, []);
   return (
-    <div className="container flex flex-col md:flex-row md:gap-10">
+    <div className="container flex flex-col md:flex-row md:gap-10 mt-20">
       <section id="image">
         <div className="aspect-square w-full p-4  overflow-hidden rounded-md lg:aspect-none group-hover:opacity-75 lg:h-80">
           <img

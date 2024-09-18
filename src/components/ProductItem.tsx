@@ -11,7 +11,7 @@ const ProductItem = ({ product }: { product: Product }) => {
   const dispatch = useDispatch();
   const { id, image, title, category, price, rating } = product;
   function handleAddToCart() {
-    let item = {
+    const item = {
       ...product,
       quantity: 1,
     };
