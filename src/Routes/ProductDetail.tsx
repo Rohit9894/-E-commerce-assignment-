@@ -4,19 +4,28 @@ import { Product } from "@/type/type";
 import { Star } from "lucide-react";
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-
+import { useDispatch } from "react-redux";
+import { addToCart } from "@/redux/cart.slice";
 const ProductDetail = () => {
   const [item, setItem] = useState<Product | null>(null);
+  const dispatch=useDispatch();
   const { id } = useParams();
   const fetchData = async () => {
     const { data } = await singleData(id!);
     setItem(data);
   };
+  function handleAddToCart() {
+    let newItem = {
+      ...item,
+      quantity: 1,
+    };
+    dispatch(addToCart(newItem));
+  }
   useEffect(() => {
     fetchData();
   }, []);
   return (
-    <div className="container flex flex-col">
+    <div className="container flex flex-col md:flex-row md:gap-10">
       <section id="image">
         <div className="aspect-square w-full p-4  overflow-hidden rounded-md lg:aspect-none group-hover:opacity-75 lg:h-80">
           <img
@@ -42,7 +51,7 @@ const ProductDetail = () => {
         <div className="flex-center justify-between my-4">
             {/* Buttons */}
           <Button>Buy Now</Button>
-          <Button>Add To Cart</Button>
+          <Button onClick={handleAddToCart}>Add To Cart</Button>
         </div>
       </section>
     </div>

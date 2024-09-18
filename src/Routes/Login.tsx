@@ -1,26 +1,24 @@
 import { authUser } from "@/api/auth";
 import { Button } from "@/components/ui/button";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import {RootState} from "../redux/store"
+import { RootState } from "../redux/store";
 const initState = {
   username: "mor_2314",
   password: "83r5^_",
 };
 const Login = () => {
   const [formState, setFormState] = useState(initState);
-  const isAuth = useSelector((state:RootState) => state.auth.isAuth);
+  const isAuth = useSelector((state: RootState) => state.auth.isAuth);
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const loading = useSelector((state:RootState) => state.auth.loading);
+  const loading = useSelector((state: RootState) => state.auth.loading);
   function handleLogin(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
     dispatch(authUser(formState));
   }
-  if (isAuth) {
-    navigate("/");
-  }
+
   function handleChange(e: React.ChangeEvent<HTMLInputElement>) {
     const { name, value } = e.target;
     setFormState({
@@ -29,6 +27,11 @@ const Login = () => {
     });
   }
   const { username, password } = formState;
+  useEffect(() => {
+    if (isAuth) {
+      navigate("/");
+    }
+  }, [isAuth, navigate]);
   return (
     <div className="container">
       <div className="flex min-h-full flex-col justify-center px-6 py-12 lg:px-8">

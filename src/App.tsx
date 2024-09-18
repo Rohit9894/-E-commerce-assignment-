@@ -3,7 +3,7 @@ import AllRoutes from "./Routes/AllRoutes";
 
 const App = () => {
   return (
-    <div>
+    <div className="min-h-screen">
       <Navbar />
       <AllRoutes/>
     </div>

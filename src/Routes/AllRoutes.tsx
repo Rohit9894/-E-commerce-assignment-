@@ -5,6 +5,7 @@ import ProductDetail from "./ProductDetail";
 import Cart from "./Cart";
 import PrivateRoute from "@/components/PrivateRoute";
 
+
 const AllRoutes = () => {
   return (
     <Routes>
@@ -22,9 +23,9 @@ const AllRoutes = () => {
       <Route
         path="/cart"
         element={
-          <PrivateRoute>
+          // <PrivateRoute>
             <Cart />
-          </PrivateRoute>
+          // </PrivateRoute>
         }
       />
     </Routes>

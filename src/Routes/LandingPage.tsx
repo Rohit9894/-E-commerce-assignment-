@@ -5,6 +5,8 @@ import ProductItem from "@/components/ProductItem";
 import SortFilter from "@/components/SortFilter";
 import { Product } from "@/type/type";
 import { useEffect, useRef, useState } from "react";
+import { useSelector } from "react-redux";
+import { RootState } from "../redux/store";
 const category = [
   "electronics",
   "jewelery",
@@ -13,6 +15,7 @@ const category = [
 ];
 const LandingPage = () => {
   const globalDataRef = useRef<Product[]>([]);
+  const isAuth = useSelector((state: RootState) => state.auth.isAuth);
   const [productData, setProductData] = useState<Product[]>([]);
   const [sort, setSort] = useState<boolean>(false);
   const [loading, setLoading] = useState<boolean>(false);
@@ -125,7 +128,13 @@ const LandingPage = () => {
         </BottomDrawer>
       )}
 
-      <div className="container">
+      <div className="container mt-20">
+        {/* message */}
+        {isAuth && (
+          <p className="block md:hidden my-4 text-primary text-xl font-semibold ">
+            Hey Jhon
+          </p>
+        )}{" "}
         {/* sort filter */}
         <SortFilter
           show={sort}

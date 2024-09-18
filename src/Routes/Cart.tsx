@@ -4,8 +4,10 @@ import { Button } from "@/components/ui/button";
 import { Product } from "@/type/type";
 import { useSelector } from "react-redux";
 import { RootState } from "../redux/store";
+import { useNavigate } from "react-router-dom";
 
 function Cart() {
+  const navigate=useNavigate()
   const cartData: Product[] = useSelector(
     (state: RootState) => state.cart.cart
   );
@@ -14,16 +16,20 @@ function Cart() {
     .toFixed(2);
   let tax = cartData.length > 0 ? 140 : 0;
   let grandTotal = (Number(total) + Number(tax)).toFixed(2);
+  function handleOrder(){
+    alert("Your order is placed")
+    navigate("/")
+  }
 
   return (
-    <div className="container">
+    <div className="container mt-4">
       {cartData.length > 0 ? (
         cartData.map((item) => <CartItem key={item.id} item={item} />)
       ) : (
         <h1>Please Add To Cart</h1>
       )}
       {/* Total */}
-      <div className="bg-gray-200 rounded-lg mt-8">
+      <div className="bg-gray-200 rounded-lg mt-8 sm:max-w-screen-md mx-auto">
         <PriceItem item="SubTotal" price={total} />
         <PriceItem item="Tax" price={total > 0 ? 100 : 0} />
         <PriceItem item="Shipping" price={total > 0 ? 40 : 0} />
@@ -35,7 +41,11 @@ function Cart() {
         </div>
       </div>
       {/* order button */}
-      <Button className=" my-4 w-full h-12 text-xl">Order</Button>
+      <div className="w-full flex justify-center">
+        <Button onClick={handleOrder} className="mx-auto w-full sm:max-w-screen-md my-4  h-12 text-xl">
+          Order
+        </Button>
+      </div>
     </div>
   );
 }
