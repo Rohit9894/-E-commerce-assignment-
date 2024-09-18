@@ -63,6 +63,7 @@ const Login = () => {
                   name="username"
                   value={username}
                   type="text"
+                  placeholder="mor_2314"
                   onChange={handleChange}
                   required
                   className="input-style"
@@ -90,6 +91,7 @@ const Login = () => {
                   name="password"
                   value={password}
                   onChange={handleChange}
+                  placeholder="83r5^_"
                   type={show ? "text" : "password"}
                   required
                   className="input-style"

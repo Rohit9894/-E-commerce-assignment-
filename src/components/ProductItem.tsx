@@ -8,11 +8,15 @@ import { RootState } from "../redux/store";
 
 const ProductItem = ({ product }: { product: Product }) => {
   const cartData = useSelector((state: RootState) => state.cart.cart);
+  const isAuth = useSelector((state: RootState) => state.auth.isAuth);
 
   const dispatch = useDispatch();
   const { id, image, title, category, price, rating } = product;
   const isDisabled = cartData.some((item) => item.id == id);
   function handleAddToCart() {
+    if(!isAuth){
+      return alert("Please Login")
+    }
     const item = {
       ...product,
       quantity: 1,
