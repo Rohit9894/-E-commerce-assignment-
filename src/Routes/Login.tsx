@@ -5,11 +5,12 @@ import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { RootState } from "../redux/store";
 const initState = {
-  username: "mor_2314",
-  password: "83r5^_",
+  username: "",
+  password: "",
 };
 const Login = () => {
   const [formState, setFormState] = useState(initState);
+  const [show, setShow] = useState<boolean>(false);
   const isAuth = useSelector((state: RootState) => state.auth.isAuth);
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -46,7 +47,7 @@ const Login = () => {
           <form className="space-y-6" onSubmit={handleLogin}>
             <div>
               <label className="block text-sm font-medium leading-6 text-gray-900">
-                Email address
+                Username
               </label>
               <div className="mt-2">
                 <input
@@ -75,15 +76,18 @@ const Login = () => {
                   </a>
                 </div>
               </div>
-              <div className="mt-2">
+              <div className="mt-2 relative">
                 <input
                   id="password"
                   name="password"
                   value={password}
-                  type="password"
+                  type={show ? "text" : "password"}
                   required
                   className="input-style"
                 />
+                <Button onClick={()=>setShow(!show)} type="button" className="absolute top-0 right-0">
+                 {show?"Hide":"Show"}
+                </Button>
               </div>
             </div>
 

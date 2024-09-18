@@ -10,9 +10,11 @@ export default {
       },
       container: {
         center: true,
-        padding: "1rem",
-        screens: {
-          "2xl": "1400px",
+
+        padding: {
+          DEFAULT: "1rem",
+          sm: "2rem",
+          lg: "2rem",
         },
       },
       borderRadius: {
