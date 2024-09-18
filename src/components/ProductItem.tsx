@@ -4,12 +4,14 @@ import { Button } from "./ui/button";
 import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { addToCart } from "@/redux/cart.slice";
-import {RootState} from "../redux/store"
+import { RootState } from "../redux/store";
 
 const ProductItem = ({ product }: { product: Product }) => {
-  const cartData = useSelector((state:RootState) => state.cart.cart);
+  const cartData = useSelector((state: RootState) => state.cart.cart);
+
   const dispatch = useDispatch();
   const { id, image, title, category, price, rating } = product;
+  const isDisabled = cartData.some((item) => item.id == id);
   function handleAddToCart() {
     const item = {
       ...product,
@@ -47,7 +49,7 @@ const ProductItem = ({ product }: { product: Product }) => {
           </div>
           <Button
             onClick={handleAddToCart}
-            disabled={cartData.find((item)=>item.id==id)}
+            disabled={isDisabled}
             className=" w-full my-4 flex-grow-1"
           >
             Add To Cart

@@ -9,11 +9,14 @@ const SortFilter = ({
 }: BottomDrawerProps) => {
   return (
     <div className="flex-center justify-between mt-2 cursor-pointer">
-      <div onClick={() => setShow(!show)} className="filter-button">
+      <div onClick={() => setShow && setShow(!show)} className="filter-button">
         <ArrowDownUp size={"20px"} />
         <p className="font-semibold">Sort</p>
       </div>
-      <div onClick={() => setFilter(!filter)} className="filter-button">
+      <div
+        onClick={() => setFilter && setFilter(!filter)}
+        className="filter-button"
+      >
         <SlidersHorizontal size={"20px"} />
         <p className="font-semibold">Filter</p>
       </div>

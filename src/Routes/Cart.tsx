@@ -12,7 +12,7 @@ function Cart() {
     (state: RootState) => state.cart.cart
   );
   const total = +cartData
-    .reduce((a, item) => a + item.price * item.quantity, 0)
+    .reduce((a, {price,quantity=0}) => a + price * quantity, 0)
     .toFixed(2);
   const tax = cartData.length > 0 ? 140 : 0;
   const grandTotal = (Number(total) + Number(tax)).toFixed(2);

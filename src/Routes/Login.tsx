@@ -16,6 +16,7 @@ const Login = () => {
   const loading = useSelector((state: RootState) => state.auth.loading);
   function handleLogin(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
+    // @ts-ignore
     dispatch(authUser(formState));
   }
 

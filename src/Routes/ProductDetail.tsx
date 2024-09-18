@@ -7,8 +7,8 @@ import { useParams } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { addToCart } from "@/redux/cart.slice";
 const ProductDetail = () => {
-  const [item, setItem] = useState<Product | null>(null);
-  const dispatch=useDispatch();
+  const [item, setItem] = useState<Product>({} as Product);
+  const dispatch = useDispatch();
   const { id } = useParams();
   const fetchData = async () => {
     const { data } = await singleData(id!);
@@ -49,7 +49,7 @@ const ProductDetail = () => {
           </div>
         </div>
         <div className="flex-center justify-between my-4">
-            {/* Buttons */}
+          {/* Buttons */}
           <Button>Buy Now</Button>
           <Button onClick={handleAddToCart}>Add To Cart</Button>
         </div>
