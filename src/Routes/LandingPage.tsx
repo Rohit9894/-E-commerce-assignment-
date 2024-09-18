@@ -1,4 +1,4 @@
-import { getdata } from "@/api/product";
+import { getdata, sortData } from "@/api/product";
 import BottomDrawer from "@/components/BottomDrawer";
 import ProductItem from "@/components/ProductItem";
 import SortFilter from "@/components/SortFilter";
@@ -43,6 +43,16 @@ const LandingPage = () => {
       setProductData(filteredData);
     }
   }
+
+  async function handleSort(e: React.ChangeEvent<HTMLInputElement>) {
+    const { value } = e.target;
+    if (value == "") {
+      setProductData(globalDataRef.current);
+    } else {
+      const { data } = await sortData(value);
+      setProductData(data);
+    }
+  }
   // /for initial fetch data data
   useEffect(() => {
     fetchData();
@@ -62,6 +72,8 @@ const LandingPage = () => {
                 type="radio"
                 id="low-to-high"
                 name="priceOrder"
+                value={"desc"}
+                onChange={handleSort}
                 className="cursor-pointer"
               />
               <label className="block text-lg font-medium leading-6 ">
@@ -73,6 +85,8 @@ const LandingPage = () => {
                 type="radio"
                 id="high-to-low"
                 name="priceOrder"
+                value={"asc"}
+                onChange={handleSort}
                 className="cursor-pointer"
               />
               <label className="block text-lg font-medium leading-6 ">
