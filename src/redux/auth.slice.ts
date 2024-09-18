@@ -1,5 +1,6 @@
-import { createSlice } from "@reduxjs/toolkit";
 import { authUser } from "@/api/auth";
+import { createSlice } from "@reduxjs/toolkit";
+
 
 export interface AuthState {
   loading: boolean;
@@ -18,7 +19,8 @@ export const authSlice = createSlice({
   initialState,
   reducers: {
     signOut: (state) => {
-      state.isAuth = true;
+
+      state.isAuth = false;
       state.error = false;
       state.loading = false;
     },
