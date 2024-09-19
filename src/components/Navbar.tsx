@@ -32,16 +32,18 @@ const Navbar = () => {
             </Link>
           </div>
         )}
-        {!isAuth && (
-          <Button
+        {isAuth && (
+         <div className="hidden sm:block">
+           <Button
             onClick={() => (isAuth ? "" : navigate("/login"))}
-            className="lg:w-32 flex-center gap-2"
+            className=" lg:w-32 flex-center gap-2"
           >
             <div className="hidden md:block">
               <User size={"20px"} />
             </div>
             <p>{isAuth ? "Hey Jhon" : "Login"}</p>
           </Button>
+         </div>
         )}
         {isAuth && (
           <Button onClick={logout} className="bg-red-800 hover:bg-red-600">

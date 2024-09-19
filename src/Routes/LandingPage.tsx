@@ -22,6 +22,7 @@ const LandingPage = () => {
   const [filter, setFilter] = useState<boolean>(false);
   const [selected, setSelected] = useState<string[]>([]);
 
+  // fetching data from api
   const fetchData = async () => {
     try {
       setLoading(true);
@@ -44,6 +45,8 @@ const LandingPage = () => {
       );
     }
   }
+
+  // filtering the data
   function filterData() {
     if (selected.length == 0) {
       setProductData(globalDataRef.current);
