@@ -32,7 +32,7 @@ const Navbar = () => {
             </Link>
           </div>
         )}
-        {isAuth && (
+        {!isAuth && (
          <div className="hidden sm:block">
            <Button
             onClick={() => (isAuth ? "" : navigate("/login"))}
