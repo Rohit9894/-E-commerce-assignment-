@@ -23,11 +23,15 @@ const LandingPage = () => {
   const [selected, setSelected] = useState<string[]>([]);
 
   const fetchData = async () => {
-    setLoading(true);
-    const { data } = await getdata();
-    globalDataRef.current = data;
-    setProductData(data);
-    setLoading(false);
+    try {
+      setLoading(true);
+      const { data } = await getdata();
+      globalDataRef.current = data;
+      setProductData(data);
+      setLoading(false);
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   function handleChange(e: React.ChangeEvent<HTMLInputElement>) {

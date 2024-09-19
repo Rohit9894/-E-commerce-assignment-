@@ -12,6 +12,7 @@ const Login = () => {
   const [formState, setFormState] = useState(initState);
   const [show, setShow] = useState<boolean>(false);
   const isAuth = useSelector((state: RootState) => state.auth.isAuth);
+  const isError = useSelector((state: RootState) => state.auth.error);
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const loading = useSelector((state: RootState) => state.auth.loading);
@@ -41,7 +42,10 @@ const Login = () => {
     if (isAuth) {
       navigate("/");
     }
-  }, [isAuth, navigate]);
+    if (isError) {
+      alert("error");
+    }
+  }, [isAuth, isError, navigate]);
   return (
     <div className="container">
       <div className="flex min-h-full flex-col justify-center px-6 py-12 lg:px-8">
