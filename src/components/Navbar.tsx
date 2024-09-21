@@ -33,7 +33,7 @@ const Navbar = () => {
           </div>
         )}
         {!isAuth && (
-         <div className="hidden sm:block">
+         <div className="block">
            <Button
             onClick={() => (isAuth ? "" : navigate("/login"))}
             className=" lg:w-32 flex-center gap-2"
